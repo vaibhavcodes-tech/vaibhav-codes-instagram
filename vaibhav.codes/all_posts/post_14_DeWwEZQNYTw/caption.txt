@@ -1,9 +1,0 @@
-How LLM Works? 🤔 AI does NOT think - it just predicts next word.
-
-This is how ChatGPT really learns: Tokens → Numbers → Attention mechanism. 
-
-Full breakdown in 60 sec. Save this for your exam!
-
-👇 Which part blew your mind? Comment below.
-
-#howllmworks #learnai #aitokensexplained #chatgptexplained #aiforstudents

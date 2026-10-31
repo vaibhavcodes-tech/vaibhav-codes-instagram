@@ -1,9 +1,0 @@
-One expired cache key can take your whole database down. 💥
-
-Let only one request rebuild it using a lock. A longer cache time only moves the crash to later.
-
-Save this for your system design interview.
-
-Follow @vaibhav.codes for more system design reels.
-
-#systemdesign #backenddeveloper #redis #softwareengineer #techreels

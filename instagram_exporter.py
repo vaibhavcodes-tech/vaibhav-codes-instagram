@@ -8,6 +8,8 @@ import os
 import sys
 import json
 import csv
+import shutil
+import time
 import argparse
 import requests
 from datetime import datetime
@@ -94,13 +96,20 @@ def save_single_post_folder(folder_path: str, post_data: dict, is_viral_rank: in
     with open(details_path, "w", encoding="utf-8") as f:
         json.dump(details, f, ensure_ascii=False, indent=2)
 
-def run_export(username: str = "vaibhav.codes", top_viral_count: int = 5, max_posts: int = 0, only_top_viral: bool = False):
+def run_export(
+    username: str = "vaibhav.codes",
+    top_viral_count: int = 5,
+    max_posts: int = 0,
+    only_top_viral: bool = False,
+    replace_old_folder: bool = True
+):
     """
     Main export engine:
     1. Downloads profile info & profile picture.
     2. Scans all posts and extracts full metadata.
     3. Identifies and saves the Top 5 Most Viral Reels (by Views, then Likes & Comments).
     4. Downloads all posts into post-wise folders (unless only_top_viral is True).
+    If replace_old_folder=True, deletes any existing folder to ensure fresh replacement.
     """
     clean_username = username.strip().lstrip("@")
     if "instagram.com/" in clean_username:
@@ -108,11 +117,12 @@ def run_export(username: str = "vaibhav.codes", top_viral_count: int = 5, max_po
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
     user_dir = os.path.join(base_dir, clean_username)
-    os.makedirs(user_dir, exist_ok=True)
 
     print(f"\n" + "=" * 65)
     print(f"[*] INSTAGRAM EXPORTER: @{clean_username}")
     print(f"[*] Output Directory   : {os.path.abspath(user_dir)}")
+    if replace_old_folder:
+        print(f"[*] Mode               : Full clean replacement (old folder will be deleted)")
     print(f"=" * 65 + "\n")
 
     # Initialize Instaloader
@@ -143,6 +153,19 @@ def run_export(username: str = "vaibhav.codes", top_viral_count: int = 5, max_po
 
     # 1. Profile Metadata
     profile_data = extract_profile_data_safely(profile)
+
+    # Delete old folder completely and recreate fresh so old posts/files never accumulate
+    if replace_old_folder and os.path.exists(user_dir):
+        print(f"[*] Deleting old data folder to replace with fresh data: {user_dir}")
+        for attempt in range(3):
+            try:
+                shutil.rmtree(user_dir)
+                break
+            except Exception as e:
+                time.sleep(0.5)
+                if attempt == 2:
+                    shutil.rmtree(user_dir, ignore_errors=True)
+    os.makedirs(user_dir, exist_ok=True)
 
     profile_json_path = os.path.join(user_dir, "profile_info.json")
     with open(profile_json_path, "w", encoding="utf-8") as f:
@@ -304,13 +327,15 @@ def main():
     parser.add_argument("--top-viral", type=int, default=5, help="Number of viral reels to isolate (default: 5)")
     parser.add_argument("--limit", type=int, default=0, help="Maximum number of posts to scan (0 = all, default: 0)")
     parser.add_argument("--only-top", action="store_true", help="Only download the top viral reels (skip downloading all posts)")
+    parser.add_argument("--keep-old", action="store_true", help="Keep old files instead of deleting and replacing the folder")
 
     args = parser.parse_args()
     run_export(
         username=args.username,
         top_viral_count=args.top_viral,
         max_posts=args.limit,
-        only_top_viral=args.only_top
+        only_top_viral=args.only_top,
+        replace_old_folder=not args.keep_old
     )
 
 if __name__ == "__main__":

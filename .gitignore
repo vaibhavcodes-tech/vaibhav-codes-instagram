@@ -21,3 +21,15 @@ env/
 .DS_Store
 Thumbs.db
 
+# Scraped Instagram Data & Media (Dynamically replaced every 7:30 AM run)
+vaibhav.codes/
+data/
+*/all_posts/
+*/top_5_viral_reels/
+*/*.json
+*/*.csv
+*/*.jpg
+*/*.png
+*.json
+*.csv
+

@@ -141,15 +141,23 @@ def load_user_dataset(clean_username: str) -> Dict[str, Any]:
         "last_synced": last_synced
     }
 
-def perform_sync(username: str):
-    """Run full exporter sync in worker thread."""
+def perform_sync(username: str, replace_old: bool = True):
+    """Run full exporter sync in worker thread, cleanly deleting and replacing the old folder."""
     clean_username = clean_user_input(username)
     sync_state["is_syncing"] = True
     sync_state["last_sync_user"] = clean_username
     print(f"\n[SYNC WORKER] Starting export for @{clean_username} at {datetime.now().isoformat()}...")
+    if replace_old:
+        print(f"[SYNC WORKER] Mode: Clean replace — old folder will be deleted before fresh download.")
 
     try:
-        success = run_export(clean_username, top_viral_count=5, max_posts=0, only_top_viral=False)
+        success = run_export(
+            clean_username,
+            top_viral_count=5,
+            max_posts=0,
+            only_top_viral=False,
+            replace_old_folder=replace_old
+        )
         sync_state["last_sync_time"] = datetime.now().isoformat()
         sync_state["last_sync_status"] = "Success" if success else "Failed (Check terminal / network)"
         print(f"[SYNC WORKER] Finished export for @{clean_username}. Status: {sync_state['last_sync_status']}")
@@ -163,15 +171,16 @@ def perform_sync(username: str):
 # DAILY 07:30 AM SCHEDULER (7.5 AM)
 # ============================================================================
 def scheduled_daily_job():
-    """Triggered every day at 07:30 AM."""
+    """Triggered every day at 07:30 AM (7.5 AM). Automatically deletes old folder and adds fresh folder."""
     print(f"\n{'='*70}")
     print(f"[SCHEDULER 07:30 AM] Daily scheduled Instagram fetch triggered at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"[SCHEDULER 07:30 AM] Deleting old folders and creating fresh folders with latest reels...")
     print(f"{'='*70}")
 
     for user in sync_state["tracked_users"]:
         try:
-            print(f"[SCHEDULER] Fetching latest posts for tracked user: @{user}...")
-            perform_sync(user)
+            print(f"[SCHEDULER] Fetching latest posts for tracked user: @{user} (Clean Replace)...")
+            perform_sync(user, replace_old=True)
         except Exception as err:
             print(f"[SCHEDULER ERROR] Failed to sync @{user}: {err}")
 
@@ -389,8 +398,9 @@ def get_profile(
 def trigger_sync(
     background_tasks: BackgroundTasks,
     username: str = Query(DEFAULT_USERNAME, description="Instagram username to scrape and store"),
+    replace_old: bool = Query(True, description="Cleanly delete old folder and download fresh data"),
 ):
-    """Trigger an immediate export & download of reels in the background."""
+    """Trigger an immediate export & download of reels in the background (deleting and replacing old folder)."""
     clean_username = clean_user_input(username)
 
     if sync_state["is_syncing"]:
@@ -404,13 +414,14 @@ def trigger_sync(
     if clean_username not in sync_state["tracked_users"]:
         sync_state["tracked_users"].append(clean_username)
 
-    # Launch background task
-    background_tasks.add_task(perform_sync, clean_username)
+    # Launch background task with clean replacement
+    background_tasks.add_task(perform_sync, clean_username, replace_old)
 
     return {
         "status": "started",
-        "message": f"Instagram sync started for @{clean_username}. Data and covers will be stored in ./{clean_username}/",
+        "message": f"Instagram sync started for @{clean_username}. Old folder will be deleted and fresh data downloaded.",
         "username": clean_username,
+        "replace_old_folder": replace_old,
         "is_syncing": True
     }
 
