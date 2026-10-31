@@ -214,6 +214,21 @@ def run_scheduler_loop():
 scheduler_thread = threading.Thread(target=run_scheduler_loop, daemon=True)
 scheduler_thread.start()
 
+def check_initial_data():
+    """On server boot (e.g. fresh Render deploy or restart), auto-sync if data folder is missing."""
+    time.sleep(2)
+    default_user = clean_user_input(DEFAULT_USERNAME)
+    dataset = load_user_dataset(default_user)
+    if not dataset.get("posts") and not sync_state["is_syncing"]:
+        print(f"[*] Initial startup check: No data found for @{default_user}. Auto-triggering Instagram sync...")
+        try:
+            perform_sync(default_user, replace_old=False)
+        except Exception as e:
+            print(f"[!] Initial startup sync error: {e}")
+
+startup_thread = threading.Thread(target=check_initial_data, daemon=True)
+startup_thread.start()
+
 # ============================================================================
 # API ENDPOINTS
 # ============================================================================
@@ -266,15 +281,26 @@ def get_reels(
     dataset = load_user_dataset(clean_username)
     raw_posts = dataset["posts"]
 
-    # If user folder does not exist or empty, check if we should auto-trigger or notify
-    user_folder = get_user_folder(clean_username)
-    if not raw_posts and not os.path.exists(user_folder):
+    # If user data is missing or empty, auto-trigger a background sync instead of returning 404!
+    if not raw_posts:
+        if not sync_state["is_syncing"]:
+            print(f"[*] No stored reels found for @{clean_username}. Auto-triggering background sync...")
+            thread = threading.Thread(target=perform_sync, args=(clean_username, False), daemon=True)
+            thread.start()
+
         return JSONResponse(
-            status_code=404,
+            status_code=200,
             content={
-                "status": "not_found",
-                "message": f"No stored data found for @{clean_username}. Call POST /api/sync?username={clean_username} to scrape.",
-                "username": clean_username
+                "status": "syncing",
+                "message": f"First-time scrape in progress for @{clean_username}. Downloading reels from Instagram now...",
+                "username": clean_username,
+                "profile": dataset.get("profile", {}),
+                "sort": sort,
+                "limit": limit,
+                "total_count": 0,
+                "returned_count": 0,
+                "data": [],
+                "is_syncing": True
             }
         )
 
@@ -395,6 +421,12 @@ def get_profile(
     clean_username = clean_user_input(username)
     dataset = load_user_dataset(clean_username)
     profile = dataset.get("profile", {})
+
+    # Auto-trigger if missing
+    if not profile and not sync_state["is_syncing"]:
+        print(f"[*] No profile found for @{clean_username}. Auto-triggering background sync...")
+        thread = threading.Thread(target=perform_sync, args=(clean_username, False), daemon=True)
+        thread.start()
 
     base_url = str(request.base_url).rstrip("/")
     if profile.get("local_profile_pic"):
