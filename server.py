@@ -36,6 +36,9 @@ except ImportError:
     from .instagram_exporter import run_export
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "insta_data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
 DEFAULT_USERNAME = os.getenv("DEFAULT_INSTA_USERNAME", "vaibhav.codes")
 DAILY_SYNC_TIME = os.getenv("DAILY_SYNC_TIME", "07:30")  # 7:30 AM (7.5 AM)
 
@@ -56,8 +59,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount local media directory for serving cover images & profile pictures reliably
-app.mount("/media", StaticFiles(directory=BASE_DIR), name="media")
+# Mount local media directory from insta_data for serving cover images & profile pictures reliably
+app.mount("/media", StaticFiles(directory=DATA_DIR), name="media")
 
 # ============================================================================
 # STATE TRACKING
@@ -85,7 +88,16 @@ def clean_user_input(username: str) -> str:
     return user.lower()
 
 def get_user_folder(clean_username: str) -> str:
-    return os.path.join(BASE_DIR, clean_username)
+    user_folder = os.path.join(DATA_DIR, clean_username)
+    # Automatic backward compatibility migration if an old folder remains in BASE_DIR
+    legacy_folder = os.path.join(BASE_DIR, clean_username)
+    if os.path.exists(legacy_folder) and not os.path.exists(user_folder):
+        import shutil
+        try:
+            shutil.move(legacy_folder, user_folder)
+        except Exception:
+            pass
+    return user_folder
 
 def find_local_cover_file(clean_username: str, shortcode: str) -> Optional[str]:
     """Find local cover image path for a given reel shortcode."""

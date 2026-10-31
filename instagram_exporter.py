@@ -116,7 +116,17 @@ def run_export(
         clean_username = clean_username.split("instagram.com/")[1].split("/")[0].split("?")[0]
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    user_dir = os.path.join(base_dir, clean_username)
+    data_dir = os.path.join(base_dir, "insta_data")
+    os.makedirs(data_dir, exist_ok=True)
+    user_dir = os.path.join(data_dir, clean_username)
+
+    # Legacy migration: if folder existed in base_dir, move to insta_data
+    legacy_user_dir = os.path.join(base_dir, clean_username)
+    if os.path.exists(legacy_user_dir) and not os.path.exists(user_dir):
+        try:
+            shutil.move(legacy_user_dir, user_dir)
+        except Exception:
+            pass
 
     print(f"\n" + "=" * 65)
     print(f"[*] INSTAGRAM EXPORTER: @{clean_username}")
