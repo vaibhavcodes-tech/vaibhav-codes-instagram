@@ -1,0 +1,36 @@
+🚀 What really happens behind an OTP screen? 🔐
+
+A premium OTP UI is just the beginning.
+Behind that simple screen, the backend handles the complete authentication flow.
+
+Here’s the flow:
+
+1️⃣ User requests an OTP
+
+2️⃣ Backend generates the OTP
+
+3️⃣ OTP is stored securely
+
+4️⃣ Expiration time is set
+
+5️⃣ OTP is sent to the user
+
+6️⃣ User enters the OTP
+
+7️⃣ Backend checks if it exists, is not expired, and matches
+
+8️⃣ ✅ Success → User authenticated
+
+9️⃣ ❌ Failure → Request rejected
+
+🧠 UI → Backend → Verification → Authentication
+
+Good authentication isn’t just about how it looks — it’s about how it works behind the scenes.
+
+Save this Reel for later 🔖
+
+Follow @vaibhav.codes for more AI, coding & tech content 🚀
+
+[otp authentication, otp verification, otp backend, authentication flow, backend authentication, otp system, secure authentication, django authentication, django otp, backend development, software development, coding projects, developer projects, web development, frontend and backend, authentication system, how otp works, otp verification flow, api authentication, coding tutorial]
+
+#otpauthentication #backenddevelopment #webdevelopment #coding #softwaredeveloper

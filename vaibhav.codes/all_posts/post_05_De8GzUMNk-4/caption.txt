@@ -1,0 +1,26 @@
+If interviewer asks: Access Token vs Refresh Token? 🤔
+Explain with example 👇
+
+You login to app → Auth Server gives you 2 tokens:
+
+🔑 Access Token = Temporary Digital Pass (15 mins)
+→ Used to access protected APIs (profile, orders)
+→ Expires fast = 401 Unauthorized
+
+♻️ Refresh Token = Long-lived (30 days)
+→ Job is to get a NEW Access Token
+→ Happens in background, no login needed
+
+Security? Access Token = short-lived, limited misuse
+Refresh Token = stored securely, can be rotated/revoked
+
+Simple difference:
+Access Token → Access APIs
+Refresh Token → Get new Access Token
+
+Save this now — you WILL need it before interview.
+Comment “TOKEN” for the diagram + code ✅
+
+Follow @vaibhav.codes — Daily System Design @ 7PM IST
+
+#systemdesign #backend #accesstoken #vaibhavcodes

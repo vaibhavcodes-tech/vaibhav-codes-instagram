@@ -1,0 +1,15 @@
+POV: You can reverse engineer ANY app in 30 minutes 🤯
+
+I pointed REA at a Steam game and got it decompiled + running in Unity in 30 min. No source code needed.
+
+For example - you love Instagram’s double tap heart and Swiggy’s live tracking but they never share how it’s built. REA is like opening the app once and writing down the exact code for that feature.
+
+REA lets your AI agent open any finished app and work out how it was built.
+
+130k+ stars on GitHub. Free. Runs local. Trending #1.
+
+Which app feature would YOU reverse engineer first? 👇
+
+Follow @vaibhav.codes for more GitHub hidden gems.
+
+#GitHubTrending #ReverseEngineering #AItools

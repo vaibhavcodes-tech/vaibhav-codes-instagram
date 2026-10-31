@@ -1,0 +1,15 @@
+{
+  "shortcode": "De29RqMNpzu",
+  "type": "reel",
+  "is_reel": true,
+  "post_url": "https://www.instagram.com/p/De29RqMNpzu/",
+  "timestamp_utc": "2026-10-24T01:30:04",
+  "date": "2026-10-24 01:30",
+  "views": 0,
+  "likes": 10,
+  "comments": 1,
+  "engagement": 11,
+  "cover_image_url": "https://instagram.famd4-1.fna.fbcdn.net/v/t51.82787-15/861562647_1669533264849789_5682978075119672083_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ig_cache_key=NDAxNDY2NTYxMjIxNzcyMDA0NjE2Njk1MzMyNTgxODMxMjM%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjExNTIuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=Sj3t4-2KzKAQ7kNvwFa0A9s&_nc_oc=Adpi4N-Px3clweF-56YwvWGpKxDK16_DDQuAaxDs9A7v1jBgct1IJmcCSKe-00dH-X4-RsupW4X8PyP6w7VwywKr&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.famd4-1.fna&_nc_gid=ps7hsUqB2ESaJPtBgFAMhA&_nc_ss=7a20f&oh=00_AQRfbyPFZoRGRLfpogE53kxpIOCItrjbULx2MkmeguFQGA&oe=6AE7EC74",
+  "caption": "User clicked Pay once. Server charged twice. 😳\n\nSlow network → app retries → your server runs both requests.\n\nThe fix: send an idempotency key with every payment. Save it in Redis with SET NX before you charge. Same key again? Return the old response. No double charge.\n\nClassic system design interview question 🔥\n\nFollow @vaibhav.codes for more system design videos. Save this for your interview prep! 💾\n\n#systemdesign #backenddevelopment #redis #codinginterview #softwareengineering",
+  "opening_hook": "User clicked Pay once. Server charged twice. 😳"
+}

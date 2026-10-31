@@ -1,0 +1,13 @@
+Website security checklist: 20 points every developer must check before launch 🔒
+
+Claude vs Codex: do developers ne same website banayi. Ek secure nikli, doosri nahi. Model swap karne ke baad bhi result wahi raha, kyunki farak AI model ka nahi, CHECKLIST ka tha.
+
+Is checklist me SQL injection, XSS, CSRF, IDOR, authentication, API key safety aur HTTPS jaise sab zaroori security points hain, chahe tumhari website AI se bani ho ya khud code karke.
+
+📤 Apne developer dost ko bhejo
+💾 Save karo, next project pe use karna
+💬 Comment me CHECKLIST likho
+
+Follow @vaibhav.codes for more 🚀
+
+#cybersecurity #webdevelopment #codingtips #aitools #vaibhavcodes

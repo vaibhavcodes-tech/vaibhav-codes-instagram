@@ -1,0 +1,14 @@
+🚨 PHP just got an emergency security update. Two critical bugs (PHP2Shell) let a stranger run code on your server with no login.
+
+If your site runs WordPress, Laravel, Drupal, or Joomla, check your PHP version today.
+
+✅ Update to 8.5.12, 8.4.27, 8.3.36, or 8.2.35, then restart PHP
+✅ On 7.4, 8.0, or 8.1? No official update, so use the source patch and upgrade soon
+✅ Can’t update yet? Turn on Cloudflare’s rules (a temporary shield only)
+✅ On shared hosting? Ask your host to confirm the patch
+
+Save this for later and send it to the person who manages your website. 📌
+
+Follow for more simple tech news. See you soon! 👋
+
+#php #cybersecurity #wordpress #laravel #techNews

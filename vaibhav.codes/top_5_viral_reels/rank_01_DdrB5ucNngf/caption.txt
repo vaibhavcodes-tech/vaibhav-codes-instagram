@@ -1,0 +1,21 @@
+Developers, save these 3 prompts. 🧑‍💻🔥
+
+stop using AI only to “write code”.
+
+use it to actually improve your development workflow:
+
+🐛 debug — find the root cause, not just the fix
+🧪 test — generate normal, edge & invalid test cases
+⚡ optimize — understand and improve existing code
+
+and yes… i have more prompts for full projects + test cases 👀
+
+💬 comment “prompt” and i’ll send them.
+
+📌 save this for your next coding session.
+
+follow @vaibhav.codes for practical AI + coding workflows.
+
+[ai prompts for developers, coding prompts, chatgpt for developers, ai coding tools, python development, developer productivity, coding tips, ai for coding, software development, programming]
+
+#coding #aitips #developers #python #programming

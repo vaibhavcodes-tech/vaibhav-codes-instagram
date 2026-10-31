@@ -1,0 +1,11 @@
+User clicked Pay once. Server charged twice. 😳
+
+Slow network → app retries → your server runs both requests.
+
+The fix: send an idempotency key with every payment. Save it in Redis with SET NX before you charge. Same key again? Return the old response. No double charge.
+
+Classic system design interview question 🔥
+
+Follow @vaibhav.codes for more system design videos. Save this for your interview prep! 💾
+
+#systemdesign #backenddevelopment #redis #codinginterview #softwareengineering

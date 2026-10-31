@@ -1,0 +1,17 @@
+90% of devs fail this Flipkart-style interview question. 👇
+
+How do you stop one user from hitting login 1000 times?
+
+Most say “rate limiting” and stop there. The interviewer wants more:
+
+❌ Fixed Window: 100 requests at 11:59:59 + 100 at 12:00:01 = 200 in 2 seconds
+✅ Token Bucket: allows normal bursts, enforces the steady limit
+⚠️ 10 servers with their own buckets = 1000 requests (fail)
+🔥 Fix: one shared bucket in Redis, updated with a Lua script
+📩 Always send headers: how many requests are left, and when to retry
+
+Save this before your next interview. 📌
+
+Follow @vaibhav.codes for more backend + AI. Next episode: Circuit Breaker. ⚡
+
+#systemdesign #backenddevelopment #codinginterview #redis #softwareengineer

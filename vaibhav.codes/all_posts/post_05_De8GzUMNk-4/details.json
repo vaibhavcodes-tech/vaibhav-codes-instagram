@@ -1,0 +1,15 @@
+{
+  "shortcode": "De8GzUMNk-4",
+  "type": "reel",
+  "is_reel": true,
+  "post_url": "https://www.instagram.com/p/De8GzUMNk-4/",
+  "timestamp_utc": "2026-10-26T01:30:05",
+  "date": "2026-10-26 01:30",
+  "views": 0,
+  "likes": 12,
+  "comments": 0,
+  "engagement": 12,
+  "cover_image_url": "https://instagram.famd4-1.fna.fbcdn.net/v/t51.82787-15/867785472_2364618400609475_4973472069402443640_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ig_cache_key=NDAxNjExNDg4MjM1OTc0MjM5MjIzNjQ2MTgzOTcyNzYxNDI%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEyMTUuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=T-Co8PUXlMgQ7kNvwHHtiu9&_nc_oc=Adpi44VOnpIJNOFVOjK06qxnvH1n4C1jQIOMZOc3Sgqf43tq7iXqPzB3wKpxBh_L6PC99kEBKbCslpvbjaQklYE1&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.famd4-1.fna&_nc_gid=zCjew0rO9LcSPzZ_1wws4Q&_nc_ss=7a20f&oh=00_AQT6R9Rs2y8xdruLLaxahwoOy0aZPnz8YGJE3qIqfVmbVw&oe=6AE81A59",
+  "caption": "If interviewer asks: Access Token vs Refresh Token? 🤔\nExplain with example 👇\n\nYou login to app → Auth Server gives you 2 tokens:\n\n🔑 Access Token = Temporary Digital Pass (15 mins)\n→ Used to access protected APIs (profile, orders)\n→ Expires fast = 401 Unauthorized\n\n♻️ Refresh Token = Long-lived (30 days)\n→ Job is to get a NEW Access Token\n→ Happens in background, no login needed\n\nSecurity? Access Token = short-lived, limited misuse\nRefresh Token = stored securely, can be rotated/revoked\n\nSimple difference:\nAccess Token → Access APIs\nRefresh Token → Get new Access Token\n\nSave this now — you WILL need it before interview.\nComment “TOKEN” for the diagram + code ✅\n\nFollow @vaibhav.codes — Daily System Design @ 7PM IST\n\n#systemdesign #backend #accesstoken #vaibhavcodes",
+  "opening_hook": "If interviewer asks: Access Token vs Refresh Token? 🤔"
+}

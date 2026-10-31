@@ -1,0 +1,15 @@
+{
+  "shortcode": "DdB1xb7NcDg",
+  "type": "reel",
+  "is_reel": true,
+  "post_url": "https://www.instagram.com/p/DdB1xb7NcDg/",
+  "timestamp_utc": "2026-09-08T13:54:55",
+  "date": "2026-09-08 13:54",
+  "views": 0,
+  "likes": 20,
+  "comments": 0,
+  "engagement": 20,
+  "cover_image_url": "https://instagram.famd4-1.fna.fbcdn.net/v/t51.82787-15/800468916_18107297944910220_5023610305190579683_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ig_cache_key=Mzk4MTcwMDAzOTI3NjA4NTQ3MjE4MTA3Mjk3OTM4OTEwMjIw.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=UB7lPihzNb8Q7kNvwHrhmQE&_nc_oc=Adq_hGxlEMvVSYOTvM9DLjYpF6fxWWCo0kv5NmFZ9KCpnQPaopktWS0cCgmd17wqAAlGQ-SVg2kiYhlG2S_ZVzhg&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.famd4-1.fna&_nc_gid=oWSvQ6wwempz0UajPyX5iQ&_nc_ss=7a20f&oh=00_AQTM-6GHBUFX7Np97RSp_Se7YolrygxTnCzpAQvWKVaDqw&oe=6AE804F1",
+  "caption": "🚀 What really happens behind an OTP screen? 🔐\n\nA premium OTP UI is just the beginning.\nBehind that simple screen, the backend handles the complete authentication flow.\n\nHere’s the flow:\n\n1️⃣ User requests an OTP\n\n2️⃣ Backend generates the OTP\n\n3️⃣ OTP is stored securely\n\n4️⃣ Expiration time is set\n\n5️⃣ OTP is sent to the user\n\n6️⃣ User enters the OTP\n\n7️⃣ Backend checks if it exists, is not expired, and matches\n\n8️⃣ ✅ Success → User authenticated\n\n9️⃣ ❌ Failure → Request rejected\n\n🧠 UI → Backend → Verification → Authentication\n\nGood authentication isn’t just about how it looks — it’s about how it works behind the scenes.\n\nSave this Reel for later 🔖\n\nFollow @vaibhav.codes for more AI, coding & tech content 🚀\n\n[otp authentication, otp verification, otp backend, authentication flow, backend authentication, otp system, secure authentication, django authentication, django otp, backend development, software development, coding projects, developer projects, web development, frontend and backend, authentication system, how otp works, otp verification flow, api authentication, coding tutorial]\n\n#otpauthentication #backenddevelopment #webdevelopment #coding #softwaredeveloper",
+  "opening_hook": "🚀 What really happens behind an OTP screen? 🔐"
+}
