@@ -228,10 +228,10 @@ def root(request: Request):
         "status": "online",
         "documentation": f"{base_url}/docs",
         "endpoints": {
+            "refresh_now": f"{base_url}/api/refresh?username=vaibhav.codes",
             "get_reels": f"{base_url}/api/reels?username=vaibhav.codes&sort=recent&limit=5",
             "get_reel_by_shortcode": f"{base_url}/api/reels/{{shortcode}}",
             "get_profile": f"{base_url}/api/profile?username=vaibhav.codes",
-            "trigger_sync": f"{base_url}/api/sync?username=vaibhav.codes (POST)",
             "sync_status": f"{base_url}/api/sync/status",
             "scheduler_info": f"{base_url}/api/schedule"
         },
@@ -405,6 +405,65 @@ def get_profile(
         "username": clean_username,
         "data": profile
     }
+
+@app.get("/api/refresh")
+@app.post("/api/refresh")
+@app.get("/api/sync")
+def refresh_instagram_data(
+    background_tasks: BackgroundTasks,
+    request: Request,
+    username: str = Query(DEFAULT_USERNAME, description="Instagram username to scrape and store"),
+    wait: bool = Query(False, description="Set to true to wait for scraper to complete before returning response"),
+):
+    """
+    One-click Refresh URL (works via GET or POST in any web browser):
+    - Cleanly deletes the old data folder for the given username.
+    - Scrapes fresh posts, reels, metrics, and cover images from Instagram.
+    - Saves fresh data into ./insta_data/<username>/.
+    """
+    clean_username = clean_user_input(username)
+    base_url = str(request.base_url).rstrip("/")
+
+    if sync_state["is_syncing"]:
+        return JSONResponse(
+            status_code=409,
+            content={
+                "status": "busy",
+                "message": f"A refresh is already running for @{sync_state['last_sync_user']}. Please wait a few moments.",
+                "is_syncing": True,
+                "current_user": sync_state["last_sync_user"],
+                "check_status_url": f"{base_url}/api/sync/status"
+            }
+        )
+
+    if clean_username not in sync_state["tracked_users"]:
+        sync_state["tracked_users"].append(clean_username)
+
+    if wait:
+        print(f"[API REFRESH] Synchronous refresh requested for @{clean_username} (wait=True)...")
+        perform_sync(clean_username, replace_old=True)
+        dataset = load_user_dataset(clean_username)
+        return {
+            "status": "success",
+            "message": f"Successfully deleted old data and refreshed fresh data for @{clean_username}!",
+            "username": clean_username,
+            "posts_count": len(dataset.get("posts", [])),
+            "followers_count": dataset.get("profile", {}).get("followers_count"),
+            "scraped_at": sync_state["last_sync_time"],
+            "reels_url": f"{base_url}/api/reels?username={clean_username}&limit=5",
+            "profile_url": f"{base_url}/api/profile?username={clean_username}"
+        }
+    else:
+        background_tasks.add_task(perform_sync, clean_username, True)
+        return {
+            "status": "refresh_started",
+            "message": f"Old data is being deleted and fresh Instagram data is downloading for @{clean_username}...",
+            "username": clean_username,
+            "is_syncing": True,
+            "check_status_url": f"{base_url}/api/sync/status",
+            "view_reels_url": f"{base_url}/api/reels?username={clean_username}&limit=5",
+            "tip": "Add ?wait=true to the URL if you want your browser to wait until the download finishes!"
+        }
 
 @app.post("/api/sync")
 def trigger_sync(
